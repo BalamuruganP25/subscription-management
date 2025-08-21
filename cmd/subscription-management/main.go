@@ -1,26 +1,11 @@
 package main
 
 import (
-	"database/sql"
 	"log"
 	"subscription-management/pkg/handler"
 
 	"subscription-management/pkg/repository"
-
-	"github.com/pressly/goose"
 )
-
-// MigrateDBRepo - executes the database migration file
-func MigrateDBRepo(db *sql.DB) {
-
-	if err := goose.SetDialect("postgres"); err != nil {
-		panic(err)
-	}
-
-	if err := goose.Up(db, "/go/src/migrations"); err != nil {
-		panic(err)
-	}
-}
 
 func main() {
 
@@ -33,5 +18,6 @@ func main() {
 	CurdRepo := repository.NewCurdRepo(db)
 	processConfig.CurdRepo = CurdRepo
 	MigrateDBRepo(db)
+	initWebServer(processConfig)
 
 }
