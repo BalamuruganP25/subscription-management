@@ -4,7 +4,9 @@ import (
 	"database/sql"
 	"log"
 	"net/http"
+
 	"subscription-management/pkg/handler"
+	"subscription-management/pkg/handler/user"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
@@ -30,6 +32,7 @@ func initWebServer(config handler.ProcessConfig) {
 	r.Use(middleware.Logger)
 
 	r.Route("/v1", func(v1 chi.Router) {
+		v1.Post("/user", user.CreateUser(&config))
 	})
 
 	// ✅ Check for ListenAndServe error
