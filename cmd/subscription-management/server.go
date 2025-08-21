@@ -30,7 +30,6 @@ func initWebServer(config handler.ProcessConfig) {
 	r.Use(middleware.Logger)
 
 	r.Route("/v1", func(v1 chi.Router) {
-
 	})
 
 	// ✅ Check for ListenAndServe error
