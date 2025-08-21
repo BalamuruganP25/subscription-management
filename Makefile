@@ -20,3 +20,9 @@ build:
 stop:
 	@echo "🧹 Stopping services..."
 	@docker compose down
+
+## 📦 Install and tidy Go dependencies
+dep:
+	@echo "📦 Tidying and vendoring Go dependencies..."
+	@go mod tidy
+	@go mod vendor
