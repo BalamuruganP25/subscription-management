@@ -21,6 +21,8 @@ type CrudRepo interface {
 	GetUser(ctx context.Context, id string) (UserResponse, error)
 	UpdateUser(ctx context.Context, id string, phone_number string) error
 	DeleteUser(ctx context.Context, id string) error
+
+	CreateCustomer(ctx context.Context, id, name, email, phone string) error
 }
 
 func (r *CurdRepository) CreateUser(ctx context.Context, name, email_id, phone_number string) (string, error) {

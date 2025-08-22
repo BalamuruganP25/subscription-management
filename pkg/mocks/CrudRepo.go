@@ -22,6 +22,56 @@ func (_m *CrudRepo) EXPECT() *CrudRepo_Expecter {
 	return &CrudRepo_Expecter{mock: &_m.Mock}
 }
 
+// CreateCustomer provides a mock function with given fields: ctx, id, name, email, phone
+func (_m *CrudRepo) CreateCustomer(ctx context.Context, id string, name string, email string, phone string) error {
+	ret := _m.Called(ctx, id, name, email, phone)
+
+	if len(ret) == 0 {
+		panic("no return value specified for CreateCustomer")
+	}
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, string, string, string, string) error); ok {
+		r0 = rf(ctx, id, name, email, phone)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// CrudRepo_CreateCustomer_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'CreateCustomer'
+type CrudRepo_CreateCustomer_Call struct {
+	*mock.Call
+}
+
+// CreateCustomer is a helper method to define mock.On call
+//   - ctx context.Context
+//   - id string
+//   - name string
+//   - email string
+//   - phone string
+func (_e *CrudRepo_Expecter) CreateCustomer(ctx interface{}, id interface{}, name interface{}, email interface{}, phone interface{}) *CrudRepo_CreateCustomer_Call {
+	return &CrudRepo_CreateCustomer_Call{Call: _e.mock.On("CreateCustomer", ctx, id, name, email, phone)}
+}
+
+func (_c *CrudRepo_CreateCustomer_Call) Run(run func(ctx context.Context, id string, name string, email string, phone string)) *CrudRepo_CreateCustomer_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(context.Context), args[1].(string), args[2].(string), args[3].(string), args[4].(string))
+	})
+	return _c
+}
+
+func (_c *CrudRepo_CreateCustomer_Call) Return(_a0 error) *CrudRepo_CreateCustomer_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *CrudRepo_CreateCustomer_Call) RunAndReturn(run func(context.Context, string, string, string, string) error) *CrudRepo_CreateCustomer_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // CreateUser provides a mock function with given fields: ctx, name, email_id, phone_number
 func (_m *CrudRepo) CreateUser(ctx context.Context, name string, email_id string, phone_number string) (string, error) {
 	ret := _m.Called(ctx, name, email_id, phone_number)

@@ -8,6 +8,7 @@ require (
 	github.com/lib/pq v1.10.9
 	github.com/pressly/goose v2.7.0+incompatible
 	github.com/stretchr/testify v1.10.0
+	github.com/stripe/stripe-go/v76 v76.25.0
 )
 
 require (
