@@ -54,7 +54,7 @@ func UpdateUserById(s *handler.ProcessConfig) http.HandlerFunc {
 			return
 		}
 
-		err = s.CurdRepo.UpdateUser(r.Context(), userID, req.PhoneNumber)
+		err = s.CurdRepo.UpdateUser(r.Context(), userID, req.Phone_number)
 		if err != nil {
 			handler.ErrorResponse(w, http.StatusInternalServerError,
 				handler.ErrResponse{

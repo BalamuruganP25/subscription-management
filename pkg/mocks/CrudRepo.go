@@ -22,9 +22,9 @@ func (_m *CrudRepo) EXPECT() *CrudRepo_Expecter {
 	return &CrudRepo_Expecter{mock: &_m.Mock}
 }
 
-// CreateUser provides a mock function with given fields: ctx, name, email, phone
-func (_m *CrudRepo) CreateUser(ctx context.Context, name string, email string, phone string) (string, error) {
-	ret := _m.Called(ctx, name, email, phone)
+// CreateUser provides a mock function with given fields: ctx, name, email_id, phone_number
+func (_m *CrudRepo) CreateUser(ctx context.Context, name string, email_id string, phone_number string) (string, error) {
+	ret := _m.Called(ctx, name, email_id, phone_number)
 
 	if len(ret) == 0 {
 		panic("no return value specified for CreateUser")
@@ -33,16 +33,16 @@ func (_m *CrudRepo) CreateUser(ctx context.Context, name string, email string, p
 	var r0 string
 	var r1 error
 	if rf, ok := ret.Get(0).(func(context.Context, string, string, string) (string, error)); ok {
-		return rf(ctx, name, email, phone)
+		return rf(ctx, name, email_id, phone_number)
 	}
 	if rf, ok := ret.Get(0).(func(context.Context, string, string, string) string); ok {
-		r0 = rf(ctx, name, email, phone)
+		r0 = rf(ctx, name, email_id, phone_number)
 	} else {
 		r0 = ret.Get(0).(string)
 	}
 
 	if rf, ok := ret.Get(1).(func(context.Context, string, string, string) error); ok {
-		r1 = rf(ctx, name, email, phone)
+		r1 = rf(ctx, name, email_id, phone_number)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -58,13 +58,13 @@ type CrudRepo_CreateUser_Call struct {
 // CreateUser is a helper method to define mock.On call
 //   - ctx context.Context
 //   - name string
-//   - email string
-//   - phone string
-func (_e *CrudRepo_Expecter) CreateUser(ctx interface{}, name interface{}, email interface{}, phone interface{}) *CrudRepo_CreateUser_Call {
-	return &CrudRepo_CreateUser_Call{Call: _e.mock.On("CreateUser", ctx, name, email, phone)}
+//   - email_id string
+//   - phone_number string
+func (_e *CrudRepo_Expecter) CreateUser(ctx interface{}, name interface{}, email_id interface{}, phone_number interface{}) *CrudRepo_CreateUser_Call {
+	return &CrudRepo_CreateUser_Call{Call: _e.mock.On("CreateUser", ctx, name, email_id, phone_number)}
 }
 
-func (_c *CrudRepo_CreateUser_Call) Run(run func(ctx context.Context, name string, email string, phone string)) *CrudRepo_CreateUser_Call {
+func (_c *CrudRepo_CreateUser_Call) Run(run func(ctx context.Context, name string, email_id string, phone_number string)) *CrudRepo_CreateUser_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		run(args[0].(context.Context), args[1].(string), args[2].(string), args[3].(string))
 	})
@@ -185,9 +185,9 @@ func (_c *CrudRepo_GetUser_Call) RunAndReturn(run func(context.Context, string) 
 	return _c
 }
 
-// UpdateUser provides a mock function with given fields: ctx, id, phone
-func (_m *CrudRepo) UpdateUser(ctx context.Context, id string, phone string) error {
-	ret := _m.Called(ctx, id, phone)
+// UpdateUser provides a mock function with given fields: ctx, id, phone_number
+func (_m *CrudRepo) UpdateUser(ctx context.Context, id string, phone_number string) error {
+	ret := _m.Called(ctx, id, phone_number)
 
 	if len(ret) == 0 {
 		panic("no return value specified for UpdateUser")
@@ -195,7 +195,7 @@ func (_m *CrudRepo) UpdateUser(ctx context.Context, id string, phone string) err
 
 	var r0 error
 	if rf, ok := ret.Get(0).(func(context.Context, string, string) error); ok {
-		r0 = rf(ctx, id, phone)
+		r0 = rf(ctx, id, phone_number)
 	} else {
 		r0 = ret.Error(0)
 	}
@@ -211,12 +211,12 @@ type CrudRepo_UpdateUser_Call struct {
 // UpdateUser is a helper method to define mock.On call
 //   - ctx context.Context
 //   - id string
-//   - phone string
-func (_e *CrudRepo_Expecter) UpdateUser(ctx interface{}, id interface{}, phone interface{}) *CrudRepo_UpdateUser_Call {
-	return &CrudRepo_UpdateUser_Call{Call: _e.mock.On("UpdateUser", ctx, id, phone)}
+//   - phone_number string
+func (_e *CrudRepo_Expecter) UpdateUser(ctx interface{}, id interface{}, phone_number interface{}) *CrudRepo_UpdateUser_Call {
+	return &CrudRepo_UpdateUser_Call{Call: _e.mock.On("UpdateUser", ctx, id, phone_number)}
 }
 
-func (_c *CrudRepo_UpdateUser_Call) Run(run func(ctx context.Context, id string, phone string)) *CrudRepo_UpdateUser_Call {
+func (_c *CrudRepo_UpdateUser_Call) Run(run func(ctx context.Context, id string, phone_number string)) *CrudRepo_UpdateUser_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		run(args[0].(context.Context), args[1].(string), args[2].(string))
 	})

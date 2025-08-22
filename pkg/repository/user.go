@@ -17,14 +17,14 @@ func NewCurdRepo(db *sql.DB) *CurdRepository {
 }
 
 type CrudRepo interface {
-	CreateUser(ctx context.Context, name, email, phone string) (string, error)
+	CreateUser(ctx context.Context, name, email_id, phone_number string) (string, error)
 	GetUser(ctx context.Context, id string) (UserResponse, error)
-	UpdateUser(ctx context.Context, id string, phone string) error
+	UpdateUser(ctx context.Context, id string, phone_number string) error
 	DeleteUser(ctx context.Context, id string) error
 }
 
 func (r *CurdRepository) CreateUser(ctx context.Context, name, email, phone string) (string, error) {
-	query := `INSERT INTO users (name, email, phone) VALUES (?, ?, ?) RETURNING id`
+	query := `INSERT INTO users (name, email_id, phone_number) VALUES (?, ?, ?) RETURNING id`
 	var id int64
 	err := r.db.QueryRowContext(ctx, query, name, email, phone).Scan(&id)
 	if err != nil {
@@ -34,9 +34,9 @@ func (r *CurdRepository) CreateUser(ctx context.Context, name, email, phone stri
 }
 
 func (r *CurdRepository) GetUser(ctx context.Context, id string) (UserResponse, error) {
-	query := `SELECT id, name, email, phone FROM users WHERE id = ?`
+	query := `SELECT id, name, email_id, phone_number FROM users WHERE id = ?`
 	var user UserResponse
-	err := r.db.QueryRowContext(ctx, query, id).Scan(&user.ID, &user.Name, &user.Email, &user.PhoneNumber)
+	err := r.db.QueryRowContext(ctx, query, id).Scan(&user.ID, &user.Name, &user.Email_id, &user.Phone_number)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return UserResponse{}, fmt.Errorf("user not found: %w", err)
@@ -46,9 +46,9 @@ func (r *CurdRepository) GetUser(ctx context.Context, id string) (UserResponse, 
 	return user, nil
 }
 
-func (r *CurdRepository) UpdateUser(ctx context.Context, id string, phone string) error {
-	query := `UPDATE users SET phone = ? WHERE id = ?`
-	result, err := r.db.ExecContext(ctx, query, phone, id)
+func (r *CurdRepository) UpdateUser(ctx context.Context, id string, phone_number string) error {
+	query := `UPDATE users SET phone_number = ? WHERE id = ?`
+	result, err := r.db.ExecContext(ctx, query, phone_number, id)
 	if err != nil {
 		return fmt.Errorf("failed to update user: %w", err)
 	}

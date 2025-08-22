@@ -31,10 +31,10 @@ func TestDeleteUserById(t *testing.T) {
             userID: "1",
             mockFunc: func(repo *mocks.CrudRepo) {
                 repo.On("GetUser", mock.Anything, "1").Return(repository.UserResponse{
-                    ID:          "1",
-                    Name:        "Alice",
-                    Email:       "alice@example.com",
-                    PhoneNumber: "1234567890",
+                    ID:           "1",
+                    Name:         "Alice",
+                    Email_id:    "alice@example.com",
+                    Phone_number: "1234567890",
                 }, nil)
                 repo.On("DeleteUser", mock.Anything, "1").Return(nil)
             },
@@ -42,8 +42,8 @@ func TestDeleteUserById(t *testing.T) {
             wantResponse: repository.UserResponse{
                 ID:          "1",
                 Name:        "Alice",
-                Email:       "alice@example.com",
-                PhoneNumber: "1234567890",
+                Email_id:   "alice@example.com",
+                Phone_number: "1234567890",
             },
         },
         {
@@ -75,8 +75,8 @@ func TestDeleteUserById(t *testing.T) {
                 repo.On("GetUser", mock.Anything, "1").Return(repository.UserResponse{
                     ID:          "1",
                     Name:        "Alice",
-                    Email:       "alice@example.com",
-                    PhoneNumber: "1234567890",
+                    Email_id:       "alice@example.com",
+                    Phone_number: "1234567890",
                 }, nil)
                 repo.On("DeleteUser", mock.Anything, "1").Return(errors.New("delete failed"))
             },

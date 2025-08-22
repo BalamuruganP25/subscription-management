@@ -31,28 +31,28 @@ func TestUpdateUserById(t *testing.T) {
 		{
 			name:   "success",
 			userID: "1",
-			body:   `{"phone":"9876543210"}`,
+			body:   `{"phone_number":"9876543210"}`,
 			mockFunc: func(repo *mocks.CrudRepo) {
 				repo.On("GetUser", mock.Anything, "1").Return(repository.UserResponse{
-					ID:          "1",
-					Name:        "Alice",
-					Email:       "alice@example.com",
-					PhoneNumber: "1234567890",
+					ID:           "1",
+					Name:         "Alice",
+					Email_id:     "alice@example.com",
+					Phone_number: "1234567890",
 				}, nil)
 				repo.On("UpdateUser", mock.Anything, "1", "9876543210").Return(nil)
 			},
 			wantCode: http.StatusOK,
 			wantResponse: repository.UserResponse{
-				ID:          "1",
-				Name:        "Alice",
-				Email:       "alice@example.com",
-				PhoneNumber: "1234567890",
+				ID:           "1",
+				Name:         "Alice",
+				Email_id:     "alice@example.com",
+				Phone_number: "1234567890",
 			},
 		},
 		{
 			name:         "missing id",
 			userID:       "",
-			body:         `{"phone":"9876543210"}`,
+			body:         `{"phone_number":"9876543210"}`,
 			mockFunc:     nil,
 			wantCode:     http.StatusBadRequest,
 			wantResponse: handler.ErrResponse{Title: "validation error", Details: "user id should be empty"},
@@ -68,7 +68,7 @@ func TestUpdateUserById(t *testing.T) {
 		{
 			name:   "user not found",
 			userID: "2",
-			body:   `{"phone":"9876543210"}`,
+			body:   `{"phone_number":"9876543210"}`,
 			mockFunc: func(repo *mocks.CrudRepo) {
 				repo.On("GetUser", mock.Anything, "2").Return(repository.UserResponse{}, errors.New("not found"))
 			},
@@ -81,13 +81,13 @@ func TestUpdateUserById(t *testing.T) {
 		{
 			name:   "update error",
 			userID: "1",
-			body:   `{"phone":"9876543210"}`,
+			body:   `{"phone_number":"9876543210"}`,
 			mockFunc: func(repo *mocks.CrudRepo) {
 				repo.On("GetUser", mock.Anything, "1").Return(repository.UserResponse{
-					ID:          "1",
-					Name:        "Alice",
-					Email:       "alice@example.com",
-					PhoneNumber: "1234567890",
+					ID:           "1",
+					Name:         "Alice",
+					Email_id:     "alice@example.com",
+					Phone_number: "1234567890",
 				}, nil)
 				repo.On("UpdateUser", mock.Anything, "1", "9876543210").Return(errors.New("update failed"))
 			},

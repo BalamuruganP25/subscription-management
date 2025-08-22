@@ -7,17 +7,17 @@ type ProcessConfig struct {
 }
 
 type UserRequest struct {
-	Name        string `json:"name"`
-	Email       string `json:"email"`
-	PhoneNumber string `json:"phone"`
+	Name         string `json:"name"`
+	Email_id     string `json:"email_id"`
+	Phone_number string `json:"phone_number"`
 }
 type UserResponse struct {
-	ID          string `json:"id"`
-	Name        string `json:"name"`
-	Email       string `json:"email"`
-	PhoneNumber string `json:"phone"`
+	ID           string `json:"id"`
+	Name         string `json:"name"`
+	Email_id     string `json:"email_id"`
+	Phone_number string `json:"phone_number"`
 }
 
 type UpdateUserRequest struct {
-	PhoneNumber string `json:"phone,omitempty"`
+	Phone_number string `json:"phone_number"`
 }
