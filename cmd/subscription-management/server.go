@@ -35,6 +35,7 @@ func initWebServer(config handler.ProcessConfig) {
 		v1.Post("/user", user.CreateUser(&config))
 		v1.Get("/user/{id}", user.GetUserById(&config))
 		v1.Patch("/user/{id}", user.UpdateUserById(&config))
+		v1.Delete("/user/{id}", user.DeleteUserById(&config))
 	})
 
 	// ✅ Check for ListenAndServe error

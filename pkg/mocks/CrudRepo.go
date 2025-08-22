@@ -81,6 +81,53 @@ func (_c *CrudRepo_CreateUser_Call) RunAndReturn(run func(context.Context, strin
 	return _c
 }
 
+// DeleteUser provides a mock function with given fields: ctx, id
+func (_m *CrudRepo) DeleteUser(ctx context.Context, id string) error {
+	ret := _m.Called(ctx, id)
+
+	if len(ret) == 0 {
+		panic("no return value specified for DeleteUser")
+	}
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, string) error); ok {
+		r0 = rf(ctx, id)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// CrudRepo_DeleteUser_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'DeleteUser'
+type CrudRepo_DeleteUser_Call struct {
+	*mock.Call
+}
+
+// DeleteUser is a helper method to define mock.On call
+//   - ctx context.Context
+//   - id string
+func (_e *CrudRepo_Expecter) DeleteUser(ctx interface{}, id interface{}) *CrudRepo_DeleteUser_Call {
+	return &CrudRepo_DeleteUser_Call{Call: _e.mock.On("DeleteUser", ctx, id)}
+}
+
+func (_c *CrudRepo_DeleteUser_Call) Run(run func(ctx context.Context, id string)) *CrudRepo_DeleteUser_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(context.Context), args[1].(string))
+	})
+	return _c
+}
+
+func (_c *CrudRepo_DeleteUser_Call) Return(_a0 error) *CrudRepo_DeleteUser_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *CrudRepo_DeleteUser_Call) RunAndReturn(run func(context.Context, string) error) *CrudRepo_DeleteUser_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // GetUser provides a mock function with given fields: ctx, id
 func (_m *CrudRepo) GetUser(ctx context.Context, id string) (repository.UserResponse, error) {
 	ret := _m.Called(ctx, id)
