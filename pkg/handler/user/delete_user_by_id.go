@@ -16,7 +16,7 @@ func DeleteUserById(s *handler.ProcessConfig) http.HandlerFunc {
 		if userID == "" {
 			handler.ErrorResponse(w, http.StatusBadRequest, handler.ErrResponse{
 				Title:   "validation error",
-				Details: "user id should be empty",
+				Details: "user id should not be empty",
 			})
 			return
 		}

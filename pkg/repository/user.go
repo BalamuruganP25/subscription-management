@@ -23,18 +23,18 @@ type CrudRepo interface {
 	DeleteUser(ctx context.Context, id string) error
 }
 
-func (r *CurdRepository) CreateUser(ctx context.Context, name, email, phone string) (string, error) {
-	query := `INSERT INTO users (name, email_id, phone_number) VALUES (?, ?, ?) RETURNING id`
-	var id int64
-	err := r.db.QueryRowContext(ctx, query, name, email, phone).Scan(&id)
+func (r *CurdRepository) CreateUser(ctx context.Context, name, email_id, phone_number string) (string, error) {
+	query := `INSERT INTO users (name, email_id, phone_number) VALUES ($1, $2, $3) RETURNING id::text`
+	var id string
+	err := r.db.QueryRow(query, name, email_id, phone_number).Scan(&id)
 	if err != nil {
 		return "", fmt.Errorf("failed to create user: %w", err)
 	}
-	return fmt.Sprintf("%d", id), nil
+	return id, nil
 }
 
 func (r *CurdRepository) GetUser(ctx context.Context, id string) (UserResponse, error) {
-	query := `SELECT id, name, email_id, phone_number FROM users WHERE id = ?`
+	query := `SELECT id, name, email_id, phone_number FROM users WHERE id = $1`
 	var user UserResponse
 	err := r.db.QueryRowContext(ctx, query, id).Scan(&user.ID, &user.Name, &user.Email_id, &user.Phone_number)
 	if err != nil {
@@ -47,7 +47,7 @@ func (r *CurdRepository) GetUser(ctx context.Context, id string) (UserResponse, 
 }
 
 func (r *CurdRepository) UpdateUser(ctx context.Context, id string, phone_number string) error {
-	query := `UPDATE users SET phone_number = ? WHERE id = ?`
+	query := `UPDATE users SET phone_number = $1 WHERE id = $2`
 	result, err := r.db.ExecContext(ctx, query, phone_number, id)
 	if err != nil {
 		return fmt.Errorf("failed to update user: %w", err)
@@ -63,7 +63,7 @@ func (r *CurdRepository) UpdateUser(ctx context.Context, id string, phone_number
 }
 
 func (r *CurdRepository) DeleteUser(ctx context.Context, id string) error {
-	query := `UPDATE users SET status = false WHERE id = ?`
+	query := `UPDATE users SET status = false WHERE id = $1`
 	result, err := r.db.ExecContext(ctx, query, id)
 	if err != nil {
 		return fmt.Errorf("failed to delete user: %w", err)
