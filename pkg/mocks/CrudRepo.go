@@ -72,6 +72,57 @@ func (_c *CrudRepo_CreateCustomer_Call) RunAndReturn(run func(context.Context, s
 	return _c
 }
 
+// CreateSubscription provides a mock function with given fields: ctx, customerID, priceID, promoCode, subscriptionID, subscriptionStatus
+func (_m *CrudRepo) CreateSubscription(ctx context.Context, customerID string, priceID string, promoCode string, subscriptionID string, subscriptionStatus string) error {
+	ret := _m.Called(ctx, customerID, priceID, promoCode, subscriptionID, subscriptionStatus)
+
+	if len(ret) == 0 {
+		panic("no return value specified for CreateSubscription")
+	}
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, string, string, string, string, string) error); ok {
+		r0 = rf(ctx, customerID, priceID, promoCode, subscriptionID, subscriptionStatus)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// CrudRepo_CreateSubscription_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'CreateSubscription'
+type CrudRepo_CreateSubscription_Call struct {
+	*mock.Call
+}
+
+// CreateSubscription is a helper method to define mock.On call
+//   - ctx context.Context
+//   - customerID string
+//   - priceID string
+//   - promoCode string
+//   - subscriptionID string
+//   - subscriptionStatus string
+func (_e *CrudRepo_Expecter) CreateSubscription(ctx interface{}, customerID interface{}, priceID interface{}, promoCode interface{}, subscriptionID interface{}, subscriptionStatus interface{}) *CrudRepo_CreateSubscription_Call {
+	return &CrudRepo_CreateSubscription_Call{Call: _e.mock.On("CreateSubscription", ctx, customerID, priceID, promoCode, subscriptionID, subscriptionStatus)}
+}
+
+func (_c *CrudRepo_CreateSubscription_Call) Run(run func(ctx context.Context, customerID string, priceID string, promoCode string, subscriptionID string, subscriptionStatus string)) *CrudRepo_CreateSubscription_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(context.Context), args[1].(string), args[2].(string), args[3].(string), args[4].(string), args[5].(string))
+	})
+	return _c
+}
+
+func (_c *CrudRepo_CreateSubscription_Call) Return(_a0 error) *CrudRepo_CreateSubscription_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *CrudRepo_CreateSubscription_Call) RunAndReturn(run func(context.Context, string, string, string, string, string) error) *CrudRepo_CreateSubscription_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // CreateUser provides a mock function with given fields: ctx, name, email_id, phone_number
 func (_m *CrudRepo) CreateUser(ctx context.Context, name string, email_id string, phone_number string) (string, error) {
 	ret := _m.Called(ctx, name, email_id, phone_number)

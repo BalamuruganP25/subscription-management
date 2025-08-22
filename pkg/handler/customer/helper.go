@@ -24,3 +24,13 @@ func ValidateCustomerRequest(user handler.CreateCustomerRequest) error {
 	}
 	return nil
 }
+
+func ValidateSubscriptionRequest(sub handler.CreateSubscriptionRequest) error {
+	if sub.CustomerID == "" {
+		return errors.New("customer id is required")
+	}
+	if sub.PriceID == "" {
+		return errors.New("price id is required")
+	}
+	return nil
+}

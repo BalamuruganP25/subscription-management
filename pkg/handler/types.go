@@ -34,3 +34,17 @@ type CreateCustomerResponse struct {
 	Email_id     string `json:"email_id"`
 	Phone_number string `json:"phone_number"`
 }
+
+type CreateSubscriptionRequest struct {
+	CustomerID string `json:"customer_id"`
+	PriceID    string `json:"price_id"`
+	PromoCode  string `json:"promo_code"`
+}
+
+type CreateSubscriptionResponse struct {
+	CustomerID         string `json:"customer_id"`
+	PriceID            string `json:"price_id"`
+	PromoCode          string `json:"promo_code"`
+	SubscriptionID     string `json:"subscription_id"`
+	SubscriptionStatus string `json:"subscription_status"`
+}

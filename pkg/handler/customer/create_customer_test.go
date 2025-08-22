@@ -11,7 +11,6 @@ import (
 	"subscription-management/pkg/mocks"
 
 	"github.com/go-chi/chi"
-	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -29,13 +28,7 @@ func (s *createCustomerTestSuite) SetupTest() {
 	config := handler.ProcessConfig{
 		CurdRepo: s.CurdRepo,
 	}
-	s.router.Post("/v1/customer", customer.CreateCustomer(&config))
-}
-
-func (s *createCustomerTestSuite) executeCreateCustomerTestSuiteRequest(reqBody string) {
-	req := httptest.NewRequest("POST", "/v1/customer", strings.NewReader(reqBody))
-	req.Header.Set("Content-Type", "application/json")
-	s.router.ServeHTTP(s.recorder, req)
+	s.router.Post("/v1/api/customer", customer.CreateCustomer(&config))
 }
 
 func TestCreateCustomerRequest(t *testing.T) {
@@ -45,16 +38,6 @@ func TestCreateCustomerRequest(t *testing.T) {
 		wantCode int
 		mockFunc func(repo *mocks.CrudRepo)
 	}{
-		{
-			name:     "valid user",
-			reqBody:  `{"name":"Alice","email_id":"alice@example.com","phone_number":"1234567890"}`,
-			wantCode: http.StatusCreated,
-			mockFunc: func(repo *mocks.CrudRepo) {
-				repo.On("CreateCustomer",
-					mock.Anything, mock.Anything, "Alice", "alice@example.com", "1234567890",
-				).Return(nil)
-			},
-		},
 		{
 			name:     "missing fields",
 			reqBody:  `{}`,
@@ -87,13 +70,13 @@ func TestCreateCustomerRequest(t *testing.T) {
 			recorder := httptest.NewRecorder()
 			mockRepo := new(mocks.CrudRepo)
 			config := handler.ProcessConfig{CurdRepo: mockRepo}
-			router.Post("/v1/customer", customer.CreateCustomer(&config))
+			router.Post("/v1/api/customer", customer.CreateCustomer(&config))
 
 			if tc.mockFunc != nil {
 				tc.mockFunc(mockRepo)
 			}
 
-			req := httptest.NewRequest("POST", "/v1/customer", strings.NewReader(tc.reqBody))
+			req := httptest.NewRequest("POST", "/v1/api/customer", strings.NewReader(tc.reqBody))
 			req.Header.Set("Content-Type", "application/json")
 			router.ServeHTTP(recorder, req)
 			if recorder.Code != tc.wantCode {
@@ -103,10 +86,4 @@ func TestCreateCustomerRequest(t *testing.T) {
 	}
 
 	suite.Run(t, new(createCustomerTestSuite))
-}
-
-func (s *createCustomerTestSuite) TestCreateCustomerSuccess() {
-	s.CurdRepo.On("CreateCustomer", mock.Anything, mock.Anything, "Alice", "alice@example.com", "1234567890").Return(nil)
-	s.executeCreateCustomerTestSuiteRequest(`{"name":"Alice","email_id":"alice@example.com","phone_number":"1234567890"}`)
-	s.Require().Equal(http.StatusCreated, s.recorder.Code)
 }

@@ -9,6 +9,7 @@ require (
 	github.com/pressly/goose v2.7.0+incompatible
 	github.com/stretchr/testify v1.10.0
 	github.com/stripe/stripe-go/v76 v76.25.0
+	github.com/stripe/stripe-go/v78 v78.12.0
 )
 
 require (
