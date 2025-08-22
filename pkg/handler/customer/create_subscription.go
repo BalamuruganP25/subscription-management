@@ -27,8 +27,7 @@ func CreateSubscription(config *handler.ProcessConfig) http.HandlerFunc {
 			)
 			return
 		}
-		// soon i will add the STRIPE_API_KEY in env
-		// stripe.Key = os.Getenv("STRIPE_API_KEY")
+		stripe.Key = config.StripeKey
 
 		params := &stripe.SubscriptionParams{
 			Customer: stripe.String(req.CustomerID),

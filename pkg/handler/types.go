@@ -3,7 +3,8 @@ package handler
 import "subscription-management/pkg/repository"
 
 type ProcessConfig struct {
-	CurdRepo repository.CrudRepo
+	CurdRepo  repository.CrudRepo
+	StripeKey string
 }
 
 type UserRequest struct {
