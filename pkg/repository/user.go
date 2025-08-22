@@ -20,6 +20,7 @@ type CrudRepo interface {
 	CreateUser(ctx context.Context, name, email, phone string) (string, error)
 	GetUser(ctx context.Context, id string) (UserResponse, error)
 	UpdateUser(ctx context.Context, id string, phone string) error
+	DeleteUser(ctx context.Context, id string) error
 }
 
 func (r *CurdRepository) CreateUser(ctx context.Context, name, email, phone string) (string, error) {
@@ -50,6 +51,22 @@ func (r *CurdRepository) UpdateUser(ctx context.Context, id string, phone string
 	result, err := r.db.ExecContext(ctx, query, phone, id)
 	if err != nil {
 		return fmt.Errorf("failed to update user: %w", err)
+	}
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("failed to get rows affected: %w", err)
+	}
+	if rowsAffected == 0 {
+		return fmt.Errorf("no user found with id: %s", id)
+	}
+	return nil
+}
+
+func (r *CurdRepository) DeleteUser(ctx context.Context, id string) error {
+	query := `UPDATE users SET status = false WHERE id = ?`
+	result, err := r.db.ExecContext(ctx, query, id)
+	if err != nil {
+		return fmt.Errorf("failed to delete user: %w", err)
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
