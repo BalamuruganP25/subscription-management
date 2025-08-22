@@ -3,6 +3,7 @@ package user
 import (
 	"errors"
 	"regexp"
+	"subscription-management/pkg/handler"
 )
 
 var (
@@ -29,7 +30,7 @@ func ValidatePhoneNumber(phone string) error {
 	return nil
 }
 
-func ValidateUserRequest(user UserRequest) error {
+func ValidateUserRequest(user handler.UserRequest) error {
 	if user.Name == "" {
 		return errors.New("name is required")
 	}
