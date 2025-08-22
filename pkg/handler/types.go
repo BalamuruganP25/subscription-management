@@ -49,3 +49,11 @@ type CreateSubscriptionResponse struct {
 	SubscriptionID     string `json:"subscription_id"`
 	SubscriptionStatus string `json:"subscription_status"`
 }
+
+type TaxResponse struct {
+	Country   string  `json:"country"`
+	State     string  `json:"state"`
+	TaxRate   float64 `json:"tax_rate"`
+	TaxAmount float64 `json:"tax_amount"`
+	Amount    float64 `json:"amount"`
+}

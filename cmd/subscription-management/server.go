@@ -7,6 +7,7 @@ import (
 
 	"subscription-management/pkg/handler"
 	"subscription-management/pkg/handler/customer"
+	"subscription-management/pkg/handler/tax"
 	"subscription-management/pkg/handler/user"
 
 	"github.com/go-chi/chi"
@@ -42,6 +43,9 @@ func initWebServer(config handler.ProcessConfig) *http.Server {
 		// customer part
 		v1.Post("/api/customers", customer.CreateCustomer(&config))
 		v1.Post("/api/subscriptions", customer.CreateSubscription(&config))
+
+		// tax part
+		v1.Get("/api/tax/{country}/{state}/{amount}", tax.GetTax(&config))
 
 	})
 
