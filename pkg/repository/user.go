@@ -19,6 +19,7 @@ func NewCurdRepo(db *sql.DB) *CurdRepository {
 type CrudRepo interface {
 	CreateUser(ctx context.Context, name, email, phone string) (string, error)
 	GetUser(ctx context.Context, id string) (UserResponse, error)
+	UpdateUser(ctx context.Context, id string, phone string) error
 }
 
 func (r *CurdRepository) CreateUser(ctx context.Context, name, email, phone string) (string, error) {
@@ -42,4 +43,20 @@ func (r *CurdRepository) GetUser(ctx context.Context, id string) (UserResponse, 
 		return UserResponse{}, fmt.Errorf("failed to get user: %w", err)
 	}
 	return user, nil
+}
+
+func (r *CurdRepository) UpdateUser(ctx context.Context, id string, phone string) error {
+	query := `UPDATE users SET phone = ? WHERE id = ?`
+	result, err := r.db.ExecContext(ctx, query, phone, id)
+	if err != nil {
+		return fmt.Errorf("failed to update user: %w", err)
+	}
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("failed to get rows affected: %w", err)
+	}
+	if rowsAffected == 0 {
+		return fmt.Errorf("no user found with id: %s", id)
+	}
+	return nil
 }

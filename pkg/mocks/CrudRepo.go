@@ -138,6 +138,54 @@ func (_c *CrudRepo_GetUser_Call) RunAndReturn(run func(context.Context, string) 
 	return _c
 }
 
+// UpdateUser provides a mock function with given fields: ctx, id, phone
+func (_m *CrudRepo) UpdateUser(ctx context.Context, id string, phone string) error {
+	ret := _m.Called(ctx, id, phone)
+
+	if len(ret) == 0 {
+		panic("no return value specified for UpdateUser")
+	}
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, string, string) error); ok {
+		r0 = rf(ctx, id, phone)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// CrudRepo_UpdateUser_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'UpdateUser'
+type CrudRepo_UpdateUser_Call struct {
+	*mock.Call
+}
+
+// UpdateUser is a helper method to define mock.On call
+//   - ctx context.Context
+//   - id string
+//   - phone string
+func (_e *CrudRepo_Expecter) UpdateUser(ctx interface{}, id interface{}, phone interface{}) *CrudRepo_UpdateUser_Call {
+	return &CrudRepo_UpdateUser_Call{Call: _e.mock.On("UpdateUser", ctx, id, phone)}
+}
+
+func (_c *CrudRepo_UpdateUser_Call) Run(run func(ctx context.Context, id string, phone string)) *CrudRepo_UpdateUser_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(context.Context), args[1].(string), args[2].(string))
+	})
+	return _c
+}
+
+func (_c *CrudRepo_UpdateUser_Call) Return(_a0 error) *CrudRepo_UpdateUser_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *CrudRepo_UpdateUser_Call) RunAndReturn(run func(context.Context, string, string) error) *CrudRepo_UpdateUser_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // NewCrudRepo creates a new instance of CrudRepo. It also registers a testing interface on the mock and a cleanup function to assert the mocks expectations.
 // The first argument is typically a *testing.T value.
 func NewCrudRepo(t interface {
