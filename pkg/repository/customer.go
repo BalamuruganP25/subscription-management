@@ -46,3 +46,20 @@ func (r *CurdRepository) CreateSubscription(
 	}
 	return nil
 }
+
+func (r *CurdRepository) UpdateSubscription(ctx context.Context, subscriptionID, status string) error {
+	query := `UPDATE customer_subscriptions SET subscription_status = $1 WHERE subscription_id = $2`
+	result, err := r.db.ExecContext(ctx, query, status, subscriptionID)
+	if err != nil {
+		return fmt.Errorf("failed to update subscription: %w", err)
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("failed to get rows affected: %w", err)
+	}
+	if rowsAffected == 0 {
+		return fmt.Errorf("no subscription found with ID: %s", subscriptionID)
+	}
+	return nil
+}
