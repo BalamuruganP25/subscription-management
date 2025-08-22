@@ -26,7 +26,7 @@ func MigrateDBRepo(db *sql.DB) {
 	}
 }
 
-func initWebServer(config handler.ProcessConfig) {
+func initWebServer(config handler.ProcessConfig) *http.Server {
 
 	log.Println("🚀 Server is starting on :8089...")
 	r := chi.NewRouter()
@@ -43,11 +43,16 @@ func initWebServer(config handler.ProcessConfig) {
 		v1.Post("/api/customers", customer.CreateCustomer(&config))
 		v1.Post("/api/subscriptions", customer.CreateSubscription(&config))
 
-	
 	})
 
 	// ✅ Check for ListenAndServe error
-	if err := http.ListenAndServe(":8089", r); err != nil {
-		log.Fatalf("❌ Failed to start server: %v", err)
+	// if err := http.ListenAndServe(":8089", r); err != nil {
+	// 	log.Fatalf("❌ Failed to start server: %v", err)
+	// }
+
+	return &http.Server{
+		Addr:    ":8089",
+		Handler: r,
 	}
+
 }
