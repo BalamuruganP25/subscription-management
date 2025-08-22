@@ -32,9 +32,7 @@ func CreateCustomer(s *handler.ProcessConfig) http.HandlerFunc {
 			return
 
 		}
-		// soon i will add stripe key from env
-		// stripe.Key = os.Getenv("STRIPE_API_KEY")
-		// Create customer in Stripe
+		stripe.Key = s.StripeKey
 
 		params := &stripe.CustomerParams{
 			Name:  stripe.String(req.Name),
