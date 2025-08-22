@@ -32,6 +32,11 @@ github.com/stretchr/testify/assert/yaml
 github.com/stretchr/testify/mock
 github.com/stretchr/testify/require
 github.com/stretchr/testify/suite
+# github.com/stripe/stripe-go/v76 v76.25.0
+## explicit; go 1.13
+github.com/stripe/stripe-go/v76
+github.com/stripe/stripe-go/v76/customer
+github.com/stripe/stripe-go/v76/form
 # gopkg.in/yaml.v3 v3.0.1
 ## explicit
 gopkg.in/yaml.v3
