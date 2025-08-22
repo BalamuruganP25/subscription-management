@@ -9,6 +9,7 @@ import (
 	"subscription-management/pkg/handler/customer"
 	"subscription-management/pkg/handler/tax"
 	"subscription-management/pkg/handler/user"
+	"subscription-management/pkg/handler/webhook"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
@@ -46,6 +47,9 @@ func initWebServer(config handler.ProcessConfig) *http.Server {
 
 		// tax part
 		v1.Get("/api/tax/{country}/{state}/{amount}", tax.GetTax(&config))
+
+		// webhook part
+		v1.Post("/api/webhook", webhook.WebhookHandler(&config))
 
 	})
 

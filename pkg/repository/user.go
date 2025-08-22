@@ -24,6 +24,7 @@ type CrudRepo interface {
 
 	CreateCustomer(ctx context.Context, id, name, email, phone string) error
 	CreateSubscription(ctx context.Context, customerID, priceID, promoCode, subscriptionID, subscriptionStatus string) error
+	UpdateSubscription(ctx context.Context, subscriptionID, status string) error
 }
 
 func (r *CurdRepository) CreateUser(ctx context.Context, name, email_id, phone_number string) (string, error) {

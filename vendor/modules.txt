@@ -42,6 +42,7 @@ github.com/stripe/stripe-go/v76/form
 github.com/stripe/stripe-go/v78
 github.com/stripe/stripe-go/v78/form
 github.com/stripe/stripe-go/v78/subscription
+github.com/stripe/stripe-go/v78/webhook
 # gopkg.in/yaml.v3 v3.0.1
 ## explicit
 gopkg.in/yaml.v3

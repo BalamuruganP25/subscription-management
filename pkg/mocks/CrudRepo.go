@@ -286,6 +286,54 @@ func (_c *CrudRepo_GetUser_Call) RunAndReturn(run func(context.Context, string) 
 	return _c
 }
 
+// UpdateSubscription provides a mock function with given fields: ctx, subscriptionID, status
+func (_m *CrudRepo) UpdateSubscription(ctx context.Context, subscriptionID string, status string) error {
+	ret := _m.Called(ctx, subscriptionID, status)
+
+	if len(ret) == 0 {
+		panic("no return value specified for UpdateSubscription")
+	}
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, string, string) error); ok {
+		r0 = rf(ctx, subscriptionID, status)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// CrudRepo_UpdateSubscription_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'UpdateSubscription'
+type CrudRepo_UpdateSubscription_Call struct {
+	*mock.Call
+}
+
+// UpdateSubscription is a helper method to define mock.On call
+//   - ctx context.Context
+//   - subscriptionID string
+//   - status string
+func (_e *CrudRepo_Expecter) UpdateSubscription(ctx interface{}, subscriptionID interface{}, status interface{}) *CrudRepo_UpdateSubscription_Call {
+	return &CrudRepo_UpdateSubscription_Call{Call: _e.mock.On("UpdateSubscription", ctx, subscriptionID, status)}
+}
+
+func (_c *CrudRepo_UpdateSubscription_Call) Run(run func(ctx context.Context, subscriptionID string, status string)) *CrudRepo_UpdateSubscription_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(context.Context), args[1].(string), args[2].(string))
+	})
+	return _c
+}
+
+func (_c *CrudRepo_UpdateSubscription_Call) Return(_a0 error) *CrudRepo_UpdateSubscription_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *CrudRepo_UpdateSubscription_Call) RunAndReturn(run func(context.Context, string, string) error) *CrudRepo_UpdateSubscription_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // UpdateUser provides a mock function with given fields: ctx, id, phone_number
 func (_m *CrudRepo) UpdateUser(ctx context.Context, id string, phone_number string) error {
 	ret := _m.Called(ctx, id, phone_number)
