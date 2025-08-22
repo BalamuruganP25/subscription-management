@@ -10,7 +10,7 @@ import (
 func CreateUser(s *handler.ProcessConfig) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
-		var req UserRequest
+		var req handler.UserRequest
 
 		// Decode the request body
 		err := json.NewDecoder(r.Body).Decode(&req)
@@ -46,7 +46,7 @@ func CreateUser(s *handler.ProcessConfig) http.HandlerFunc {
 			return
 		}
 
-		response := UserResponse{
+		response := handler.UserResponse{
 			ID:          user_id,
 			Name:        req.Name,
 			Email:       req.Email,
