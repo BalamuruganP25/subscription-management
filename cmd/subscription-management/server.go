@@ -39,8 +39,11 @@ func initWebServer(config handler.ProcessConfig) {
 		v1.Patch("/user/{id}", user.UpdateUserById(&config))
 		v1.Delete("/user/{id}", user.DeleteUserById(&config))
 
-		// strip part
+		// customer part
 		v1.Post("/api/customers", customer.CreateCustomer(&config))
+		v1.Post("/api/subscriptions", customer.CreateSubscription(&config))
+
+	
 	})
 
 	// ✅ Check for ListenAndServe error
