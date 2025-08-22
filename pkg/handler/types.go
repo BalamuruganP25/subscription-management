@@ -17,3 +17,7 @@ type UserResponse struct {
 	Email       string `json:"email"`
 	PhoneNumber string `json:"phone"`
 }
+
+type UpdateUserRequest struct {
+	PhoneNumber string `json:"phone,omitempty"`
+}

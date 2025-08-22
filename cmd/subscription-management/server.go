@@ -34,6 +34,7 @@ func initWebServer(config handler.ProcessConfig) {
 	r.Route("/v1", func(v1 chi.Router) {
 		v1.Post("/user", user.CreateUser(&config))
 		v1.Get("/user/{id}", user.GetUserById(&config))
+		v1.Patch("/user/{id}", user.UpdateUserById(&config))
 	})
 
 	// ✅ Check for ListenAndServe error
