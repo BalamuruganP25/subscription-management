@@ -4,12 +4,13 @@
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    phone VARCHAR(15) NOT NULL,
-    status boolean DEFAULT 'true',
+    email_id VARCHAR(100) NOT NULL UNIQUE,
+    phone_number VARCHAR(15) NOT NULL,
+    status BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 
 -- +goose Down
 -- SQL in this section is executed when the migration is rolled back.

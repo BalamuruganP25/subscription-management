@@ -33,16 +33,16 @@ func TestGetUser(t *testing.T) {
 				repo.On("GetUser", mock.Anything, "1").Return(repository.UserResponse{
 					ID:          "1",
 					Name:        "Alice",
-					Email:       "alice@example.com",
-					PhoneNumber: "1234567890",
+					Email_id:       "alice@example.com",
+					Phone_number: "1234567890",
 				}, nil)
 			},
 			wantCode: http.StatusOK,
 			wantResponse: repository.UserResponse{
 				ID:          "1",
 				Name:        "Alice",
-				Email:       "alice@example.com",
-				PhoneNumber: "1234567890",
+				Email_id:       "alice@example.com",
+				Phone_number: "1234567890",
 			},
 		},
 		{

@@ -35,7 +35,7 @@ func CreateUser(s *handler.ProcessConfig) http.HandlerFunc {
 
 		}
 
-		user_id, err := s.CurdRepo.CreateUser(r.Context(), req.Name, req.Email, req.PhoneNumber)
+		user_id, err := s.CurdRepo.CreateUser(r.Context(), req.Name, req.Email_id, req.Phone_number)
 		if err != nil {
 			handler.ErrorResponse(w, http.StatusInternalServerError,
 				handler.ErrResponse{
@@ -47,10 +47,10 @@ func CreateUser(s *handler.ProcessConfig) http.HandlerFunc {
 		}
 
 		response := handler.UserResponse{
-			ID:          user_id,
-			Name:        req.Name,
-			Email:       req.Email,
-			PhoneNumber: req.PhoneNumber,
+			ID:           user_id,
+			Name:         req.Name,
+			Email_id:     req.Email_id,
+			Phone_number: req.Phone_number,
 		}
 
 		handler.SendResponse(w, response, http.StatusCreated)

@@ -47,7 +47,7 @@ func TestCreateUserRequest(t *testing.T) {
 	}{
 		{
 			name:     "valid user",
-			reqBody:  `{"name":"Alice","email":"alice@example.com","phone":"1234567890"}`,
+			reqBody:  `{"name":"Alice","email_id":"alice@example.com","phone_number":"1234567890"}`,
 			wantCode: http.StatusCreated,
 			mockFunc: func(repo *mocks.CrudRepo) {
 				repo.On("CreateUser",
@@ -63,13 +63,13 @@ func TestCreateUserRequest(t *testing.T) {
 		},
 		{
 			name:     "invalid email",
-			reqBody:  `{"name":"Bob","email":"invalid-email","phone":"1234567890"}`,
+			reqBody:  `{"name":"Bob","email_id":"invalid-email","phone_number":"1234567890"}`,
 			wantCode: http.StatusBadRequest,
 			mockFunc: nil,
 		},
 		{
 			name:     "invalid phone",
-			reqBody:  `{"name":"Bob","email":"bob@example.com","phone":"invalid-phone"}`,
+			reqBody:  `{"name":"Bob","email_id":"bob@example.com","phone_number":"invalid-phone"}`,
 			wantCode: http.StatusBadRequest,
 			mockFunc: nil,
 		},
@@ -107,6 +107,6 @@ func TestCreateUserRequest(t *testing.T) {
 
 func (s *createUserTestSuite) TestCreateUserSuccess() {
 	s.CurdRepo.On("CreateUser", mock.Anything, "Alice", "alice@example.com", "1234567890").Return("1", nil)
-	s.executeCreateUserTestSuiteRequest(`{"name":"Alice","email":"alice@example.com","phone":"1234567890"}`)
+	s.executeCreateUserTestSuiteRequest(`{"name":"Alice","email_id":"alice@example.com","phone_number":"1234567890"}`)
 	s.Require().Equal(http.StatusCreated, s.recorder.Code)
 }
