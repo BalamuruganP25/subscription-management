@@ -5,6 +5,7 @@ services:
     build: .
     environment:
       DATABASE_URL: "host=go_db user=postgres password=postgres dbname=postgres sslmode=disable"
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
     ports:
       - "8089:8089"
     depends_on:
