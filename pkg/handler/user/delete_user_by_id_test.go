@@ -50,7 +50,7 @@ func TestDeleteUserById(t *testing.T) {
 			mockFunc: nil,
 			wantCode: http.StatusBadRequest,
 			wantResponse: handler.ErrResponse{
-				Title:   "validation error",
+				Title:   "invalid request",
 				Details: "user id should be empty",
 			},
 		},

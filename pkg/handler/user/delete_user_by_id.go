@@ -8,6 +8,7 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
+// soft delete user by setting status to false
 func DeleteUserById(s *handler.ProcessConfig) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
@@ -15,7 +16,7 @@ func DeleteUserById(s *handler.ProcessConfig) http.HandlerFunc {
 		userID := chi.URLParam(r, "id")
 		if userID == "" {
 			handler.ErrorResponse(w, http.StatusBadRequest, handler.ErrResponse{
-				Title:   "validation error",
+				Title:   "invalid request",
 				Details: "user id should not be empty",
 			})
 			return
