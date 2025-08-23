@@ -183,7 +183,7 @@ A simple RESTful API for managing users in a subscription system, built with Go,
 }
 ```
 
-### 6. Get Tax details
+### 7. Get Tax details
 
 **GET** `/v1/api/tax/{country}/{state}/{amount}`
 
@@ -198,7 +198,7 @@ A simple RESTful API for managing users in a subscription system, built with Go,
 }
 ```
 
-### 6. Create Subscriptions
+### 8. webhook update
 
 **POST** `/v1/api/webhooks/stripe`
 
