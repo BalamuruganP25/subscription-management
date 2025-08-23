@@ -29,11 +29,11 @@ func (s *createUserTestSuite) SetupTest() {
 	config := handler.ProcessConfig{
 		CurdRepo: s.CurdRepo,
 	}
-	s.router.Post("/v1/user", user.CreateUser(&config))
+	s.router.Post("/v1/api/users", user.CreateUser(&config))
 }
 
 func (s *createUserTestSuite) executeCreateUserTestSuiteRequest(reqBody string) {
-	req := httptest.NewRequest("POST", "/v1/user", strings.NewReader(reqBody))
+	req := httptest.NewRequest("POST", "/v1/api/users", strings.NewReader(reqBody))
 	req.Header.Set("Content-Type", "application/json")
 	s.router.ServeHTTP(s.recorder, req)
 }
@@ -87,13 +87,13 @@ func TestCreateUserRequest(t *testing.T) {
 			recorder := httptest.NewRecorder()
 			mockRepo := new(mocks.CrudRepo)
 			config := handler.ProcessConfig{CurdRepo: mockRepo}
-			router.Post("/v1/user", user.CreateUser(&config))
+			router.Post("/v1/api/users", user.CreateUser(&config))
 
 			if tc.mockFunc != nil {
 				tc.mockFunc(mockRepo)
 			}
 
-			req := httptest.NewRequest("POST", "/v1/user", strings.NewReader(tc.reqBody))
+			req := httptest.NewRequest("POST", "/v1/api/users", strings.NewReader(tc.reqBody))
 			req.Header.Set("Content-Type", "application/json")
 			router.ServeHTTP(recorder, req)
 			if recorder.Code != tc.wantCode {

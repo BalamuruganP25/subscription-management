@@ -95,7 +95,7 @@ func TestDeleteUserById(t *testing.T) {
 			config := handler.ProcessConfig{CurdRepo: mockRepo}
 			handlerFunc := user.DeleteUserById(&config)
 
-			req := httptest.NewRequest(http.MethodDelete, fmt.Sprintf("/v1/user/%s", tt.userID), nil)
+			req := httptest.NewRequest(http.MethodDelete, fmt.Sprintf("/v1/api/users/%s", tt.userID), nil)
 			routeCtx := chi.NewRouteContext()
 			routeCtx.URLParams.Add("id", tt.userID)
 			req = req.WithContext(context.WithValue(req.Context(), chi.RouteCtxKey, routeCtx))

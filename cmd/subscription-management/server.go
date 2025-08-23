@@ -36,10 +36,10 @@ func initWebServer(config handler.ProcessConfig) *http.Server {
 
 	r.Route("/v1", func(v1 chi.Router) {
 		// user part
-		v1.Post("/user", user.CreateUser(&config))
-		v1.Get("/user/{id}", user.GetUserById(&config))
-		v1.Patch("/user/{id}", user.UpdateUserById(&config))
-		v1.Delete("/user/{id}", user.DeleteUserById(&config))
+		v1.Post("/api/users", user.CreateUser(&config))
+		v1.Get("/api/users/{id}", user.GetUserById(&config))
+		v1.Patch("/api/users/{id}", user.UpdateUserById(&config))
+		v1.Delete("/api/users/{id}", user.DeleteUserById(&config))
 
 		// customer part
 		v1.Post("/api/customers", customer.CreateCustomer(&config))
