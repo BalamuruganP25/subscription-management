@@ -70,9 +70,9 @@ func TestGetUser(t *testing.T) {
 
 			router := chi.NewRouter()
 			// Register both routes
-			router.Get("/v1/user/{id}", handlerFunc)
+			router.Get("/v1/api/users/{id}", handlerFunc)
 
-			req := httptest.NewRequest("GET", fmt.Sprintf("/v1/user/%s", tt.userID), nil)
+			req := httptest.NewRequest("GET", fmt.Sprintf("/v1/api/users/%s", tt.userID), nil)
 			routeCtx := chi.NewRouteContext()
 			routeCtx.URLParams.Add("id", tt.userID)
 			req = req.WithContext(

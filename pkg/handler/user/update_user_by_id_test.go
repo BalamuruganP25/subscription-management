@@ -108,7 +108,7 @@ func TestUpdateUserById(t *testing.T) {
 			config := handler.ProcessConfig{CurdRepo: mockRepo}
 			handlerFunc := user.UpdateUserById(&config)
 
-			req := httptest.NewRequest(http.MethodPatch, fmt.Sprintf("/v1/user/%s", tt.userID), bytes.NewBufferString(tt.body))
+			req := httptest.NewRequest(http.MethodPatch, fmt.Sprintf("/v1/api/users/%s", tt.userID), bytes.NewBufferString(tt.body))
 			routeCtx := chi.NewRouteContext()
 			routeCtx.URLParams.Add("id", tt.userID)
 			req = req.WithContext(context.WithValue(req.Context(), chi.RouteCtxKey, routeCtx))
