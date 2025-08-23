@@ -6,19 +6,35 @@ A simple RESTful API for managing users in a subscription system, built with Go,
 
 ## Prerequisites
 
-- [Docker](https://www.docker.com/) (for both Go and PostgreSQL)
+Docker (required for running both Go and PostgreSQL services)
+If Docker is not installed, follow the instructions for your platform:
+
+1. Install Docker on [Mac](https://docs.docker.com/docker-for-mac/install/)
+
+2. Install Docker on [Windows](https://docs.docker.com/docker-for-windows/install/)
+
+3. Install Docker on [Linux](https://docs.docker.com/engine/install/)
 
 ---
 
 ## Getting Started
 
 1. **Clone the repository:**
+
    ```sh
    git clone https://github.com/yourusername/subscription-management.git
    cd subscription-management
    ```
+2. **Update the Stripe key in the .env file**
 
-2. **Use the Makefile for common tasks:**
+    The Stripe API key has been shared via email. Please update the .env file with the provided key:
+
+  ```sh
+      STRIPE_SECRET_KEY=your_stripe_secret_key_here 
+
+   ```
+
+3. **Use the Makefile for common tasks:**
 
    - **🔧 Build Docker containers**
      ```sh
@@ -49,6 +65,7 @@ A simple RESTful API for managing users in a subscription system, built with Go,
 **POST** `/v1/api/user`
 
 **Request Body:**
+
 ```json
 {
     "name":"bala",
@@ -58,6 +75,7 @@ A simple RESTful API for managing users in a subscription system, built with Go,
 ```
 
 **Response:**
+
 ```json
 {
     "id":"1",
@@ -72,6 +90,7 @@ A simple RESTful API for managing users in a subscription system, built with Go,
 **GET** `/v1/api/{id}`
 
 **Response:**
+
 ```json
 {
     "id":"1",
@@ -87,6 +106,7 @@ A simple RESTful API for managing users in a subscription system, built with Go,
 **DELETE** `/v1/api/{id}`
 
 **Response:**
+
 ```json
 {
     "message":"user deleted successfully"
@@ -99,6 +119,7 @@ A simple RESTful API for managing users in a subscription system, built with Go,
 
 
 **Request Body:**
+
 ```json
 {
     "phone_number":"9916588437"
@@ -106,6 +127,7 @@ A simple RESTful API for managing users in a subscription system, built with Go,
 ```
 
 **Response:**
+
 ```json
 {
     "message":"user deleted successfully"
@@ -117,6 +139,7 @@ A simple RESTful API for managing users in a subscription system, built with Go,
 **POST** `/v1/api/customers`
 
 **Request Body:**
+
 ```json
 {
     "name":"bala",
@@ -126,6 +149,7 @@ A simple RESTful API for managing users in a subscription system, built with Go,
 ```
 
 **Response:**
+
 ```json
 {
     "id":"1",
@@ -140,6 +164,7 @@ A simple RESTful API for managing users in a subscription system, built with Go,
 **POST** `/v1/api/customers`
 
 **Request Body:**
+
 ```json
 {
     "name":"bala",
@@ -149,6 +174,7 @@ A simple RESTful API for managing users in a subscription system, built with Go,
 ```
 
 **Response:**
+
 ```json
 {
     "id":"1",
@@ -163,6 +189,7 @@ A simple RESTful API for managing users in a subscription system, built with Go,
 **POST** `/v1/api/subscriptions`
 
 **Request Body:**
+
 ```json
 {
     "customer_id":"bala",
@@ -172,6 +199,7 @@ A simple RESTful API for managing users in a subscription system, built with Go,
 ```
 
 **Response:**
+
 ```json
 {
     "id":"1",
@@ -188,6 +216,7 @@ A simple RESTful API for managing users in a subscription system, built with Go,
 **GET** `/v1/api/tax/{country}/{state}/{amount}`
 
 **Response:**
+
 ```json
 {
     "country":"US",
@@ -203,6 +232,7 @@ A simple RESTful API for managing users in a subscription system, built with Go,
 **POST** `/v1/api/webhooks/stripe`
 
 **Request Body:**
+
 ```json
    {
   "id": "",
