@@ -11,8 +11,8 @@ import (
 	"subscription-management/pkg/handler/user"
 	"subscription-management/pkg/handler/webhook"
 
-	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/chi/v5"
 	"github.com/pressly/goose"
 )
 
@@ -37,7 +37,7 @@ func initWebServer(config handler.ProcessConfig) *http.Server {
 	r.Route("/v1", func(v1 chi.Router) {
 		// user part
 		v1.Post("/user", user.CreateUser(&config))
-		v1.Get("/user/{userID}", user.GetUserById(&config))
+		v1.Get("/user/{id}", user.GetUserById(&config))
 		v1.Patch("/user/{id}", user.UpdateUserById(&config))
 		v1.Delete("/user/{id}", user.DeleteUserById(&config))
 
@@ -52,11 +52,6 @@ func initWebServer(config handler.ProcessConfig) *http.Server {
 		v1.Post("/api/webhook", webhook.WebhookHandler(&config))
 
 	})
-
-	// ✅ Check for ListenAndServe error
-	// if err := http.ListenAndServe(":8089", r); err != nil {
-	// 	log.Fatalf("❌ Failed to start server: %v", err)
-	// }
 
 	return &http.Server{
 		Addr:    ":8089",

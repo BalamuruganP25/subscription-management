@@ -31,17 +31,17 @@ func TestGetUser(t *testing.T) {
 			userID: "1",
 			mockFunc: func(repo *mocks.CrudRepo) {
 				repo.On("GetUser", mock.Anything, "1").Return(repository.UserResponse{
-					ID:          "1",
-					Name:        "Alice",
-					Email_id:       "alice@example.com",
+					ID:           "1",
+					Name:         "Alice",
+					Email_id:     "alice@example.com",
 					Phone_number: "1234567890",
 				}, nil)
 			},
 			wantCode: http.StatusOK,
 			wantResponse: repository.UserResponse{
-				ID:          "1",
-				Name:        "Alice",
-				Email_id:       "alice@example.com",
+				ID:           "1",
+				Name:         "Alice",
+				Email_id:     "alice@example.com",
 				Phone_number: "1234567890",
 			},
 		},
@@ -70,11 +70,11 @@ func TestGetUser(t *testing.T) {
 
 			router := chi.NewRouter()
 			// Register both routes
-			router.Get("/v1/user/{userID}", handlerFunc)
+			router.Get("/v1/user/{id}", handlerFunc)
 
 			req := httptest.NewRequest("GET", fmt.Sprintf("/v1/user/%s", tt.userID), nil)
 			routeCtx := chi.NewRouteContext()
-			routeCtx.URLParams.Add("userID", tt.userID)
+			routeCtx.URLParams.Add("id", tt.userID)
 			req = req.WithContext(
 				context.WithValue(req.Context(), chi.RouteCtxKey, routeCtx),
 			)

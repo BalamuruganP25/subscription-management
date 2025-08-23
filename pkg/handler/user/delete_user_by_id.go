@@ -22,7 +22,7 @@ func DeleteUserById(s *handler.ProcessConfig) http.HandlerFunc {
 		}
 
 		// Fetch user details from the database
-		user, err := s.CurdRepo.GetUser(r.Context(), userID)
+		_, err := s.CurdRepo.GetUser(r.Context(), userID)
 		if err != nil {
 			if userID == "" {
 				handler.ErrorResponse(w, http.StatusNotFound,
@@ -54,7 +54,10 @@ func DeleteUserById(s *handler.ProcessConfig) http.HandlerFunc {
 			return
 		}
 
+		resp := handler.DeleteUserResponse{
+			Message: "user deleted successfully",
+		}
 		// Send the user details in the response
-		handler.SendResponse(w, user, http.StatusOK)
+		handler.SendResponse(w, resp, http.StatusOK)
 	}
 }
