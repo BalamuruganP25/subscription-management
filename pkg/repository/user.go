@@ -72,6 +72,7 @@ func (r *CurdRepository) UpdateUser(ctx context.Context, id string, phone_number
 	return nil
 }
 
+// soft delete user by setting status to false
 func (r *CurdRepository) DeleteUser(ctx context.Context, id string) error {
 	query := `UPDATE users SET status = false WHERE id = $1`
 	result, err := r.db.ExecContext(ctx, query, id)
