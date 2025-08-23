@@ -11,8 +11,7 @@ import (
 func GetUserById(s *handler.ProcessConfig) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// Get user ID from URL parameters
-		userID := chi.URLParam(r, "userID")
-		fmt.Println("User ID:", userID)
+		userID := chi.URLParam(r, "id")
 		if userID == "" {
 			handler.ErrorResponse(w, http.StatusBadRequest, handler.ErrResponse{
 				Title:   "validation error",

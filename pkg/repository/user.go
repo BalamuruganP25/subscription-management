@@ -38,14 +38,20 @@ func (r *CurdRepository) CreateUser(ctx context.Context, name, email_id, phone_n
 }
 
 func (r *CurdRepository) GetUser(ctx context.Context, id string) (UserResponse, error) {
-	query := `SELECT id, name, email_id, phone_number FROM users WHERE id = $1`
+	query := `SELECT id, name, email_id, phone_number, status FROM users WHERE id = $1`
 	var user UserResponse
-	err := r.db.QueryRowContext(ctx, query, id).Scan(&user.ID, &user.Name, &user.Email_id, &user.Phone_number)
+	var status bool
+	err := r.db.QueryRowContext(ctx, query, id).Scan(&user.ID, &user.Name, &user.Email_id, &user.Phone_number, &status)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return UserResponse{}, fmt.Errorf("user not found: %w", err)
 		}
 		return UserResponse{}, fmt.Errorf("failed to get user: %w", err)
+	}
+	if status {
+		user.Status = "active"
+	} else {
+		user.Status = "inactive"
 	}
 	return user, nil
 }
