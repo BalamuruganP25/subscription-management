@@ -16,6 +16,11 @@ build:
 	@echo "🔧 Building Docker images..."
 	@docker compose build
 
+## run unit tests
+test:
+	@echo "🧪 Running unit tests..."
+	go test ./... 
+
 ## 🛑 Stop and remove containers
 stop:
 	@echo "🧹 Stopping services..."

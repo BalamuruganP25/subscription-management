@@ -48,6 +48,12 @@ If Docker is not installed, follow the instructions for your platform:
      ```sh
      make stop
      ```
+
+   - **🧪 Run UnitTest Case**
+     ```sh
+     make test
+     ```
+
    - **📦 Install and tidy Go dependencies**
      ```sh
      make dep
