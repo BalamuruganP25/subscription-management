@@ -70,7 +70,7 @@ func CreateSubscription(config *handler.ProcessConfig) http.HandlerFunc {
 			SubscriptionStatus: string(sub.Status),
 		}
 
-		// Send the created customer in the response
+		// Send the created subscription in the response
 		handler.SendResponse(w, subscription, http.StatusCreated)
 	}
 
