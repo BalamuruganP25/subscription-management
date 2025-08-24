@@ -50,7 +50,7 @@ func GetTax(s *handler.ProcessConfig) http.HandlerFunc {
 			Amount:    amount,
 		}
 
-		// Send the created customer in the response
+		// Send the tax information in the response
 		handler.SendResponse(w, resp, http.StatusOK)
 	}
 }

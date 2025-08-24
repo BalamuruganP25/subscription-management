@@ -52,7 +52,7 @@ func CreateUser(s *handler.ProcessConfig) http.HandlerFunc {
 			Email_id:     req.Email_id,
 			Phone_number: req.Phone_number,
 		}
-
+		// Send the created user in the response
 		handler.SendResponse(w, response, http.StatusCreated)
 	}
 }

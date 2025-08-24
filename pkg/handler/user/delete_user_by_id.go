@@ -58,7 +58,7 @@ func DeleteUserById(s *handler.ProcessConfig) http.HandlerFunc {
 		resp := handler.DeleteUserResponse{
 			Message: "user deleted successfully",
 		}
-		// Send the user details in the response
+		// Send the user delete response
 		handler.SendResponse(w, resp, http.StatusOK)
 	}
 }

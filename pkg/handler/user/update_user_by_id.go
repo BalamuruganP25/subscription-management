@@ -65,7 +65,7 @@ func UpdateUserById(s *handler.ProcessConfig) http.HandlerFunc {
 			return
 		}
 
-		// Send the user details in the response
+		// Send the update user details response
 		handler.SendResponse(w, user, http.StatusOK)
 	}
 }

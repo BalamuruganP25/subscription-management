@@ -17,15 +17,6 @@ END $$;
 
 
 
-
--- Now create the promo_code table
-CREATE TABLE promo_code (
-    id        BIGSERIAL PRIMARY KEY,
-    promo_code TEXT NOT NULL,
-    UNIQUE(promo_code)
-);
-
 -- +goose Down
 -- SQL in this section is executed when the migration is rolled back.
-DROP TABLE IF EXISTS promo_code;
 DROP TABLE IF EXISTS goose_db_version;
