@@ -3,6 +3,8 @@ package repository
 import (
 	"context"
 	"fmt"
+
+	"github.com/lib/pq"
 )
 
 func (r *CurdRepository) CreateCustomer(ctx context.Context, id, name, email, phone string) error {
@@ -10,6 +12,13 @@ func (r *CurdRepository) CreateCustomer(ctx context.Context, id, name, email, ph
 
 	_, err := r.db.ExecContext(ctx, query, id, name, email, phone)
 	if err != nil {
+		if pgErr, ok := err.(*pq.Error); ok {
+			if pgErr.Code == "23505" {
+				// This is a unique violation error
+				return fmt.Errorf("email already exists: %w", err)
+			}
+		}
+
 		return fmt.Errorf("failed to create customer: %w", err)
 	}
 	return nil

@@ -51,6 +51,7 @@ func CreateUser(s *handler.ProcessConfig) http.HandlerFunc {
 			Name:         req.Name,
 			Email_id:     req.Email_id,
 			Phone_number: req.Phone_number,
+			Status:       "Active",
 		}
 		// Send the created user in the response
 		handler.SendResponse(w, response, http.StatusCreated)

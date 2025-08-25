@@ -4,6 +4,8 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+
+	"github.com/lib/pq"
 )
 
 type CurdRepository struct {
@@ -32,6 +34,12 @@ func (r *CurdRepository) CreateUser(ctx context.Context, name, email_id, phone_n
 	var id string
 	err := r.db.QueryRow(query, name, email_id, phone_number).Scan(&id)
 	if err != nil {
+		if pgErr, ok := err.(*pq.Error); ok {
+			if pgErr.Code == "23505" {
+				// This is a unique violation error
+				return "", fmt.Errorf("email already exists")
+			}
+		}
 		return "", fmt.Errorf("failed to create user: %w", err)
 	}
 	return id, nil
