@@ -13,12 +13,16 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+
+
 func TestGetTaxHandler(t *testing.T) {
 	tests := []struct {
 		name     string
 		country  string
 		state    string
 		amount   string
+		postalCode string
+		city	 string
 		wantCode int
 	}{
 		{
@@ -26,6 +30,8 @@ func TestGetTaxHandler(t *testing.T) {
 			country:  "IN",
 			state:    "KA",
 			amount:   "100.0",
+			city:	 "Bangalore",
+			postalCode: "560001",
 			wantCode: http.StatusOK,
 		},
 		{
@@ -33,6 +39,8 @@ func TestGetTaxHandler(t *testing.T) {
 			country:  "IN",
 			state:    "KA",
 			amount:   "abc",
+			city:	 "Bangalore",
+			postalCode: "560001",
 			wantCode: http.StatusBadRequest,
 		},
 		{
@@ -40,6 +48,8 @@ func TestGetTaxHandler(t *testing.T) {
 			country:  "",
 			state:    "KA",
 			amount:   "100.0",
+			city:	 "Bangalore",
+			postalCode: "560001",
 			wantCode: http.StatusBadRequest,
 		},
 	}

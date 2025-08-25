@@ -46,7 +46,7 @@ func initWebServer(config handler.ProcessConfig) *http.Server {
 		v1.Post("/api/subscriptions", customer.CreateSubscription(&config))
 
 		// tax part
-		v1.Get("/api/tax/{country}/{state}/{amount}", tax.GetTax(&config))
+		v1.Get("/api/tax/{country}/{state}/{city}/{amount}/{postal_code}", tax.GetTax(&config))
 
 		// webhook part
 		v1.Post("/api/webhook", webhook.WebhookHandler(&config))

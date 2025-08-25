@@ -5,8 +5,8 @@ import (
 	"strconv"
 )
 
-func ValidateTaxRequest(country, amount, state string) error {
-	if country == "" || amount == "" || state == "" {
+func ValidateTaxRequest(country, amount, state, city, postalCode string) error {
+	if country == "" || amount == "" || state == "" || city == "" || postalCode == "" {
 		return errors.New("missing required parameters")
 	}
 
@@ -17,17 +17,15 @@ func ValidateTaxRequest(country, amount, state string) error {
 	return nil
 }
 
-
-func getTaxRate(country, state string) float64 {
-	if country == "US" {
-		switch state {
-		case "CA":
-			return 7.25
-		case "NY":
-			return 8.875
-		default:
-			return 5.0
-		}
+func getCurrency(country string) string {
+	currency := "usd"
+	switch country {
+	case "IN":
+		currency = "inr"
+	case "GB":
+		currency = "gbp"
+	case "EU", "FR", "DE", "IT", "NL", "ES":
+		currency = "eur"
 	}
-	return 10.0
+	return currency
 }
